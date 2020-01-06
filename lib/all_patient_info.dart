@@ -1,3 +1,4 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:patient_record/patient_data.dart';
@@ -53,15 +54,14 @@ class _PatientInfoScreenState extends State<PatientInfoScreen> {
                                 Navigator.of(context).push(
                                   MaterialPageRoute(
                                     builder: (context) => SinglePatientInfo(
-                                      name: data['d_name'],
-                                      image1:'https://www.google.com/images/branding/googlelogo/1x/googlelogo_color_272x92dp.png',
+                                      data: data,
                                     ),
                                   ),
                                 );
                               },
-                              leading: Image.network(
-                                'https://www.google.com/images/branding/googlelogo/1x/googlelogo_color_272x92dp.png',
-                                width: 50,
+                              leading: CachedNetworkImage(
+                                imageUrl: data['beforeImage'],
+                                width: 100,
                               ),
                               title: Text('Doctor: ${data['d_name']}'),
                               subtitle: Text('Patient: ${data['p_name']}'),
